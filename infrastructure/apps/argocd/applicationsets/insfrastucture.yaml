@@ -18,7 +18,7 @@ spec:
       labels:
         app.kubernetes.io/part-of: infrastructure
     spec:
-      project: infrastructure
+      project: default
       source:
         repoURL: https://github.com/SweBarre/home-k8s.git
         targetRevision: main

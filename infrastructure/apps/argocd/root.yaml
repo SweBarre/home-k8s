@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/SweBarre/k8s-home.git
+    repoURL: https://github.com/SweBarre/home-k8s.git
     path: infrastructure/argocd/applicationsets
     targetRevision: main
   destination:

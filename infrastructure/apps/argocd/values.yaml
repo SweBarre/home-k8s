@@ -6,6 +6,16 @@ config:
   cm:
     kustomize.buildOptions: "--enable-helm"
 
+  cmp:
+    create: true
+    plugins:
+      kustomize-build-with-helm:
+        generate:
+          command: [ "sh", "-c" ]
+          args: [ "kustomize build --enable-helm" ]
+crds:
+  install: true
+
 #  oicd.config:
 #    name: RRE
 #    issuer: https://auth.rre.nu/application/o/argo-cd/

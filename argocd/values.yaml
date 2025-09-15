@@ -1,23 +1,57 @@
-global:
-  domain: argocd.app.rre.nu
-config:
-  params:
-    server.insecure: "true"
+configs:
   cm:
-    kustomize.buildOptions: "--enable-helm"
+    create: true
+    application.resourceTrackingMethod: "annotation+label"
+  cmp:
+    create: true
+    plugins:
+      kustomize-build-with-helm:
+        generate:
+          command: [ "sh", "-c" ]
+          args: [ "kustomize build --enable-helm" ]
+  params:
+    server.insecure: true
 
 crds:
   install: true
+  # -- Keep CRDs on chart uninstall
+  keep: false
 
-#  oicd.config:
-#    name: RRE
-#    issuer: https://auth.rre.nu/application/o/argo-cd/
-#    clientID: CLIENT_ID
-#    clientSecret: $oidc.azuread.clientSecret
-#    requestedScopes:
-#      - openid
-#      - profile
-#      - email
+controller:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 700Mi
+    limits:
+      cpu: 4000m
+      memory: 2Gi
+
+dex:
+  resources:
+    requests:
+      cpu: 20m
+      memory: 64Mi
+    limits:
+      cpu: 1000m
+      memory: 256Mi
+
+redis:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 2000m
+      memory: 128Mi
+
+server:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 4000m
+      memory: 256Mi
 
 repoServer:
   containerSecurityContext:
@@ -25,37 +59,54 @@ repoServer:
   volumes:
     - name: cmp-kustomize-build-with-helm
       configMap:
-        name: argocd-cmd-params-cm
+        name: argocd-cmp-cm
     - name: cmp-tmp
       emptyDir: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 4000m
+      memory: 1024Mi
   extraContainers:
-    - name: kustomize-helm
-      image: alpine:3.19
-      command: ["/bin/sh", "-c"]
-      args:
-        - |
-          apk add --no-cache curl bash git helm kustomize &&
-          sleep infinity
+    - name: kustomize-build-with-helm
+      command:
+        - argocd-cmp-server
+      image: '{{ default .Values.global.image.repository .Values.repoServer.image.repository }}:{{ default (include "argo-cd.defaultTag" .) .Values.repoServer.image.tag }}'
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        seccompProfile:
+          type: RuntimeDefault
+        capabilities:
+          drop: [ "ALL" ]
       volumeMounts:
-        - name: custom-tools
-          mountPath: /custom-tools
+        - name: plugins
+          mountPath: /home/argocd/cmp-server/plugins
+        - name: cmp-kustomize-build-with-helm
+          mountPath: /home/argocd/cmp-server/config/plugin.yaml
+          subPath: kustomize-build-with-helm.yaml
+        - mountPath: /tmp
+          name: cmp-tmp
 
-  extraVolumeMounts:
-    - name: custom-tools
-      mountPath: /custom-tools
+applicationSet:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 1000m
+      memory: 512Mi
 
-  volumes:
-    - name: custom-tools
-      emptyDir: {}
-
-server:
-  ingress:
-    enabled: false
-    tls: true
-    hostname: "argocd.app.rre.nu"
-    ingressClassName: "nginx"
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-staging
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-      nginx.ingress.kubernetes.io/service-upstream: "true"
+notifications:
+  enabled: false
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 1000m
+      memory: 128Mi

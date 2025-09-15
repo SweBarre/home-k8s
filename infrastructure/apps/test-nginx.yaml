@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-nginx
+  namespace: argocd
+spec:
+  destination:
+    namespace: test-nginx
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: infrastructure/test-nginx
+    repoURL: https://github.com/SweBarre/home-k8s.git
+    targetRevision: main
+    kustomize: {}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - Validate=true
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true

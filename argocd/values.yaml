@@ -6,13 +6,6 @@ config:
   cm:
     kustomize.buildOptions: "--enable-helm"
 
-  cmp:
-    create: true
-    plugins:
-      kustomize-build-with-helm:
-        generate:
-          command: [ "sh", "-c" ]
-          args: [ "kustomize build --enable-helm" ]
 crds:
   install: true
 
@@ -26,15 +19,34 @@ crds:
 #      - profile
 #      - email
 
-#repoServer:
-#  containerSecurityContext:
-#    readOnlyRootFilesystem: true
-#  volumes:
-#    - name: cmp-kustomize-build-with-helm
-#      configMap:
-#        name: argocd-cmp-cm
-#    - name: cmp-tmp
-#      emptyDir: {}
+repoServer:
+  containerSecurityContext:
+    readOnlyRootFilesystem: true
+  volumes:
+    - name: cmp-kustomize-build-with-helm
+      configMap:
+        name: argocd-cmd-params-cm
+    - name: cmp-tmp
+      emptyDir: {}
+  extraContainers:
+    - name: kustomize-helm
+      image: alpine:3.19
+      command: ["/bin/sh", "-c"]
+      args:
+        - |
+          apk add --no-cache curl bash git helm kustomize &&
+          sleep infinity
+      volumeMounts:
+        - name: custom-tools
+          mountPath: /custom-tools
+
+  extraVolumeMounts:
+    - name: custom-tools
+      mountPath: /custom-tools
+
+  volumes:
+    - name: custom-tools
+      emptyDir: {}
 
 server:
   ingress:

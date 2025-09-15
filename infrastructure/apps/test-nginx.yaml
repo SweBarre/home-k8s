@@ -12,8 +12,6 @@ spec:
     path: infrastructure/test-nginx
     repoURL: https://github.com/SweBarre/home-k8s.git
     targetRevision: main
-    plugin:
-      name: kustomize-build-with-helm
   syncPolicy:
     automated:
       prune: true

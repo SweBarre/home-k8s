@@ -5,9 +5,8 @@ resources:
   - ns.yaml
 
 helmCharts:
-  - name: sealed-secrets
-    chart: sealed-secrets
-    version: 2.2.2
-    repo: oci://registry-1.docker.io/bitnamicharts/nginx
-    releaseName: nginx
+  - name: nginx
+    version: 21.1.23
+    repo: oci://registry-1.docker.io/bitnamicharts
+    releaseName: my-nginx
     namespace: test-nginx

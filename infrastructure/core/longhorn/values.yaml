@@ -1,0 +1,28 @@
+csi:
+  kubeletRootDir: /var/lib/kubelet
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/auth-response-headers: Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid
+    nginx.ingress.kubernetes.io/auth-signin: https://longhorn.app.rre.nu/outpost.goauthentik.io/start?rd=$scheme://$http_host$escaped_request_uri
+    nginx.ingress.kubernetes.io/auth-snippet: |
+      proxy_set_header X-Forwarded-Host $http_host;
+    nginx.ingress.kubernetes.io/auth-url: http://ak-outpost-default.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
+  enabled: false
+  host: longhorn.app.rre.nu
+  ingressClassName: nginx
+  path: /
+  pathType: Prefix
+  secureBackends: false
+  tls: true
+  tlsSecret: longhorn.local-tls
+longhornManager:
+  log:
+    format: json
+longhornUI:
+  replicas: 1
+metrics:
+  serviceMonitor:
+    additionalLabels:
+      release: mon
+    enabled: true

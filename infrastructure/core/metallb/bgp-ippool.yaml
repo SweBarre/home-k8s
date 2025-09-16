@@ -1,0 +1,9 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: bgp-ippool
+  namespace: metallb
+spec:
+  avoidBuggyIPs: true
+  addresses:
+    - 10.100.100.0/24

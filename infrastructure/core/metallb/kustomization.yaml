@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ns.yaml
+  - bgp-advertisment.yaml
+  - bgp-ippool.yaml
+  - bgp-peer.yaml
+  - default-ippool.yaml
+  - default-l2adverisement.yaml
+
+helmCharts:
+  - name: metallb
+    version: 0.15.2
+    repo: https://metallb.github.io/metallb
+    releaseName: metallb
+    namespace: metallb

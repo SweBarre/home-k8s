@@ -1,0 +1,83 @@
+controller:
+  internal:
+    certificate:
+      secret: neuvector-internal
+  pvc:
+    capacity: 10Gi
+    enabled: true
+    storageClass: longhorn
+cve:
+  adapter:
+    affinity: {}
+    certificate:
+      keyFile: tls.key
+      pemFile: tls.crt
+      secret: ""
+    enabled: false
+    env: []
+    harbor:
+      protocol: https
+      secretName: null
+    image:
+      hash: null
+      repository: neuvector/registry-adapter
+      tag: 0.1.6
+    ingress:
+      annotations:
+        nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+      enabled: false
+      host: null
+      ingressClassName: ""
+      path: /
+      secretName: null
+      tls: false
+    internal:
+      certificate:
+        secret: neuvector-internal
+    nodeSelector: {}
+    podAnnotations: {}
+    podLabels: {}
+    priorityClassName: null
+    resources: {}
+    route:
+      enabled: false
+      host: null
+      termination: passthrough
+      tls: null
+    runAsUser: null
+    svc:
+      annotations: {}
+      loadBalancerIP: null
+      type: ClusterIP
+    tolerations: []
+  scanner:
+    internal:
+      certificate:
+        secret: neuvector-internal
+enforcer:
+  internal:
+    certificate:
+      secret: neuvector-internal
+internal:
+  autoGenerateCert: true
+  autoRotateCert: true
+  certmanager:
+    enabled: true
+    secretname: neuvector-internal
+manager:
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    enabled: true
+    host: nv.app.rre.nu
+    ingressClassName: nginx
+    path: /
+    secretName: neuvector-tls
+    startupFailureThreshold: 30
+    tls: true
+  internal:
+    certificate:
+      secret: neuvector-internal
+  route:
+    enabled: false

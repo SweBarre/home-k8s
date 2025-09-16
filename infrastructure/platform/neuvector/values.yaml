@@ -1,7 +1,4 @@
 controller:
-  internal:
-    certificate:
-      secret: neuvector-internal
   pvc:
     capacity: 10Gi
     enabled: true
@@ -31,9 +28,6 @@ cve:
       path: /
       secretName: null
       tls: false
-    internal:
-      certificate:
-        secret: neuvector-internal
     nodeSelector: {}
     podAnnotations: {}
     podLabels: {}
@@ -50,20 +44,9 @@ cve:
       loadBalancerIP: null
       type: ClusterIP
     tolerations: []
-  scanner:
-    internal:
-      certificate:
-        secret: neuvector-internal
-enforcer:
-  internal:
-    certificate:
-      secret: neuvector-internal
 internal:
   autoGenerateCert: true
   autoRotateCert: true
-  certmanager:
-    enabled: true
-    secretname: neuvector-internal
 manager:
   ingress:
     annotations:
@@ -75,9 +58,5 @@ manager:
     path: /
     secretName: neuvector-tls
     startupFailureThreshold: 30
-    tls: true
-  internal:
-    certificate:
-      secret: neuvector-internal
   route:
     enabled: false

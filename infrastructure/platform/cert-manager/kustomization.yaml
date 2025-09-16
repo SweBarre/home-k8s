@@ -9,7 +9,7 @@ resources:
 
 helmCharts:
   - name: cert-manager
-    version: 4.12.1
+    version: v1.16.2
     repo: https://metallb.github.io/metallb
     releaseName: cert-manager
     namespace: cert-manager

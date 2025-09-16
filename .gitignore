@@ -1,0 +1,13 @@
+# comment
+
+# Match any file or path named .helmignore
+.helmignore
+
+# Match any chart directory
+**/charts/
+
+# Match any file under subdir matching temp*
+*/temp*
+
+*/*/temp*
+temp?

@@ -20,14 +20,13 @@ spec:
     spec:
       project: infrastructure
       source:
-        plugin:
-          name: kustomize-build-with-helm
         repoURL: https://github.com/SweBarre/home-k8s
         targetRevision: main
         path: '{{path}}'
+        kustomize: {}
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{path.basename}}'
+        namespace: argocd
       syncPolicy:
         automated:
           prune: true

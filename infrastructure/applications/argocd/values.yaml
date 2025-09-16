@@ -2,13 +2,7 @@ configs:
   cm:
     create: true
     application.resourceTrackingMethod: "annotation+label"
-  cmp:
-    create: true
-    plugins:
-      kustomize-build-with-helm:
-        generate:
-          command: [ "sh", "-c" ]
-          args: [ "kustomize build --enable-helm" ]
+    kustomize.buildOptions: "--enable-helm"
   params:
     server.insecure: true
 
@@ -56,12 +50,6 @@ server:
 repoServer:
   containerSecurityContext:
     readOnlyRootFilesystem: true
-  volumes:
-    - name: cmp-kustomize-build-with-helm
-      configMap:
-        name: argocd-cmp-cm
-    - name: cmp-tmp
-      emptyDir: {}
   resources:
     requests:
       cpu: 100m
@@ -69,28 +57,6 @@ repoServer:
     limits:
       cpu: 4000m
       memory: 1024Mi
-  extraContainers:
-    - name: kustomize-build-with-helm
-      command:
-        - argocd-cmp-server
-      image: '{{ default .Values.global.image.repository .Values.repoServer.image.repository }}:{{ default (include "argo-cd.defaultTag" .) .Values.repoServer.image.tag }}'
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 999
-        allowPrivilegeEscalation: false
-        readOnlyRootFilesystem: true
-        seccompProfile:
-          type: RuntimeDefault
-        capabilities:
-          drop: [ "ALL" ]
-      volumeMounts:
-        - name: plugins
-          mountPath: /home/argocd/cmp-server/plugins
-        - name: cmp-kustomize-build-with-helm
-          mountPath: /home/argocd/cmp-server/config/plugin.yaml
-          subPath: kustomize-build-with-helm.yaml
-        - mountPath: /tmp
-          name: cmp-tmp
 
 applicationSet:
   resources:

@@ -1,0 +1,13 @@
+auth:
+  existingSecret: mariadb
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    labels:
+      release: mon
+primary:
+  persistence:
+    enabled: true
+    size: 5Gi
+    storageClass: longhorn

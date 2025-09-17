@@ -1,0 +1,16 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: mongo-init
+  namespace: unifi
+spec:
+  encryptedData:
+    init-mongo.js: AgCj3HUoMKCrjsTSTfTLnlR6NSpfs0oZo1fjRAz/4K0aI5/50/q+Ad0rknIoCL1uus706LrCV3pqbjnszj1VTOJMgJvLdaVT5MQTRnnjCPgnOhRt2mgRzWG9EA1AiktO3dJ3sGzc0YeBCVnPGONJ0H8GdPeMzxozLeRL1nwNbfh/tSyBS97ipkwig/aY077sDPFXUfTlu0WM/PzvBpvGF71+kP2V84DGGWryIbWe9GonF65jIoENQLklWNJGOphbvaEOAcXNCoyUINcXPNsbJ4RlaRKMGVPoDypM3RLkeJW/JGuq1dos3TUmqmbggkckB+3JidyAIqd+k9Pn4GYddNMuWE3pJJAniBZ6eEw4qQ3grLmPe0egu9gXMnMTqLxjwU+JqDEYDOcu+oBF9/y/gUkSAVT1xcrod0kAcA/GtILpT3998olFCbTpzemxvVCIWUxeRlCXA1yiQp3BCEC/WRnONv8RjDr9EokdGaUA1RqHd86BYpLXGwzCkmJGJf9wBp7wTC5bQoQmJVEZLncqCw/C2kzujhIGUAl7nkcwYPxW8EYqfogPv95aUZuIn3TOw4F+zuth0azlord6FxQlnaV2N3LOyMbzqrHL178FST8HnG/jIhsHDpd/XCewv2fGRXgijYaKX7VVUXf6JTW4VPZccCcDI51s4U3hQaGjjVd3/Y/RLfofXtgbnNIh6/dotGEM6Gs+GkSex1QjBGwE3HxVp+dHyYmAosT8mfSxKZ3mv28zQWbszQ9JijSTP0BRQHD3gJLt9X1VmvgFnuGtWyhMc8oAPX38zF0GzNBqUy1bnHqKfy0pdyOqWYZBeNXhRWCITVvGV0WlYsxabtarfo5Qi23HSYBdX6oS8IU+02aRXNFB3OBJDXqSxiTSPKwGfxJdGKVP10tBcEc1ZGgootmrfV0dDX8wgNKhSmw1ciLMUqrWCbSbSd/RgpgXK2keSuzjQ0K4WNhDAZogAQgm6JxSv7AyG2gcDTPFUE/2ej0nxjmBXRi6iny15jbR/6o/nSXIDgH2t1boGK83gjGV/xTmmOD3a5Q5QAurseIdo1zGCLNt7VpXFw==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: mongo-init
+      namespace: unifi
+    type: Opaque

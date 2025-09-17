@@ -1,0 +1,36 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: lb-bgp-unifi
+  namespace: unifi
+spec:
+  ports:
+    - name: '443'
+      protocol: TCP
+      port: 443
+      targetPort: 8443
+    - name: '8080'
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: '8443'
+      protocol: TCP
+      port: 8443
+      targetPort: 8443
+    - name: '8843'
+      protocol: TCP
+      port: 8843
+      targetPort: 8843
+    - name: '8880'
+      protocol: TCP
+      port: 8880
+      targetPort: 8880
+    - name: '6789'
+      protocol: TCP
+      port: 6789
+      targetPort: 6789
+  selector:
+    name: unifi-ctrl
+  type: LoadBalancer
+  loadBalancerIP: 10.2.0.62

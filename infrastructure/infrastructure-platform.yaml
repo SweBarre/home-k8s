@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: infrastructure-platform
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-5"
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/SweBarre/home-k8s
+      revision: main
+      directories:
+      - path: infrastructure/platform/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+      labels:
+        rre.nu/type: infrastructure-platform
+    spec:
+      project: infrastructure
+      source:
+        repoURL: https://github.com/SweBarre/home-k8s
+        targetRevision: main
+        path: '{{path}}'
+        kustomize: {}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: argocd
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        retry:
+          limit: 5
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 3m
+        syncOptions:
+        - CreateNamespace=true
+        - ServerSideApply=true
+        - RespectIgnoreDifferences=true
+        - ApplyOutOfSyncOnly=true
+        - Replace=false
+        - IgnoreMissingTemplate=true

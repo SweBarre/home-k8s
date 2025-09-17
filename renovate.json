@@ -1,6 +1,50 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
+  "extends": ["config:base"],
+  "enabledManagers": [
+    "regex",
+    "helm-values",
+    "kubernetes",
+    "kustomize"
+  ],
+  "kubernetes": {
+    "fileMatch": [
+      "infrastructure/core/[^/]+/.*\\.ya?ml$",
+      "infrastructure/platform/[^/]+/.*\\.ya?ml$",
+      "platform/[^/]+/.*\\.ya?ml$",
+      "workloads/[^/]+/.*\\.ya?ml$"
+    ]
+  },
+  "helm-values": {
+    "fileMatch": [
+      "infrastructure/core/[^/]+/values\\.ya?ml$",
+      "infrastructure/platform/[^/]+/values\\.ya?ml$",
+      "platform/[^/]+/values\\.ya?ml$",
+      "workloads/[^/]+/values\\.ya?ml$"
+    ]
+  },
+  "kustomize": {
+    "fileMatch": [
+      "infrastructure/core/[^/]+/kustomization\\.ya?ml$",
+      "infrastructure/platform/[^/]+/kustomization\\.ya?ml$",
+      "platform/[^/]+/kustomization\\.ya?ml$",
+      "workloads/[^/]+/kustomization\\.ya?ml$"
+    ]
+  },
+  "regexManagers": [
+    {
+      "description": "Catch ArgoCD applications in infra, platform, workloads",
+      "fileMatch": [
+        "infrastructure/.*\\.ya?ml$",
+        "platform/.*\\.ya?ml$",
+        "workloads/.*\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "repoURL:\\s+\"?(?<depName>[^\\s\"]+)\"?\\s*",
+        "targetRevision:\\s+\"?(?<currentValue>[^\\s\"]+)\"?"
+      ],
+      "datasourceTemplate": "git-tags"
+    }
   ]
 }
+

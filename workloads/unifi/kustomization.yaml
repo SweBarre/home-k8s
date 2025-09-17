@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ns.yaml
+  - mongo-init.yaml
+  - unifi-settings.yaml
+  - unifi-service.yaml
+  - mongodb-svc.yaml
+  - mongodb-statefuleset.yaml
+  - unifi-ctrl.yaml

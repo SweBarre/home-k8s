@@ -26,7 +26,9 @@ spec:
         - name: gotify-data
           mountPath: /app/data
   volumeClaimTemplates:
-  - metadata:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
       name: gotify-data
     spec:
       accessModes: [ "ReadWriteOnce" ]

@@ -48,5 +48,16 @@
       ],
       "datasourceTemplate": "git-tags"
     }
+  ],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "automergeType": "pr" 
+    },
+    {
+      "matchUpdateTypes": ["minor", "major"],
+      "automerge": false
+    }
   ]
 }

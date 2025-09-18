@@ -10,7 +10,7 @@ resources:
 
 helmCharts:
   - name: mariadb
-    version: 19.1.0
+    version: 19.1.2
     repo: https://charts.bitnami.com/bitnami
     releaseName: mariadb
     namespace: mariadb

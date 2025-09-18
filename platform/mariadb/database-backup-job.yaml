@@ -20,7 +20,7 @@ spec:
                 secretKeyRef:
                   name: mariadb
                   key: mariadb-root-password
-            image: docker.io/bitnami/mariadb:11.4.3-debian-12-r1
+            image: docker.io/bitnami/mariadb:11.8.3-debian-12-r0
             command:
               - /bin/bash
               - /backup-scripts/mariadb-dump-script

@@ -11,8 +11,4 @@ helmCharts:
     repo: https://kubernetes-sigs.github.io/node-feature-discovery/charts
     releaseName: ndf
     namespace: node-feature-discovery
-    valuesInline:
-      worker:
-        config:
-          sources:
-            usb: {}
+    valuesFile: values.yaml

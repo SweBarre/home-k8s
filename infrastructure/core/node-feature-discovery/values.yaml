@@ -2,13 +2,6 @@ worker:
   config:
     sources:
       usb:
-        deviceClassWhitelist:
-          - "0e"
-          - "ef"
-          - "fe"
-          - "ff"
-          - "0451"
         deviceLabelFields:
-          - "class"
-          - "vendor"
-          - "device"
+          - vendor
+          - device

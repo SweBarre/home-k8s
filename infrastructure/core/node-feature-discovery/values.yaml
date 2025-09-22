@@ -1,7 +1,19 @@
 worker:
   config:
+    core:
+      sources: ["custom", "pci", "usb"]
     sources:
+      pci:
+        # https://pci-ids.ucw.cz/read/PD
+        deviceClassWhitelist: ["01", "03", "0b40", "12"]
+
       usb:
-        deviceLabelFields:
-          - vendor
-          - device
+        # https://www.usb.org/defined-class-codes
+        deviceClassWhitelist: ["02", "03", "0e", "ef", "fe", "ff"]
+
+      custom:
+        - name: cc2531-zigbee #Texas Instruments, Inc. CC2531 ZigBee
+          matchOn:
+            - usbId:
+              vendor: ["0451"]
+              device: ["16a8"]

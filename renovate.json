@@ -2,16 +2,12 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "enabledManagers": [
-    "docker",
     "helm-values",
     "kubernetes",
     "kustomize",
     "custom.regex"
   ],
-  "docker": {
-    "pinDigests": true,
-    "separateVersion": true
-  },
+  "pinDigests": true,
   "kubernetes": {
     "managerFilePatterns": [
       "/infrastructure/core/[^/]+/.*\\.ya?ml$/",
@@ -59,7 +55,9 @@
       "automerge": false
     }
   ],
+  "commitMessagePrefix": "chore(deps):",
   "commitMessageAction": "update",
-  "commitMessageTopic": "{{depName}} to {{currentValue}} → {{newVersion}}"
+  "commitMessageTopic": "{{depName}} to {{currentValue}} → {{newVersion}}",
+  "prTitle": "chore(deps): update {{depName}} to {{newVersion}}"
 }
 

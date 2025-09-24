@@ -1,14 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
-  "enabledManagers": [
-    "custom.regex",
-    "helm-values",
-    "kubernetes",
-    "kustomize"
-  ],
+  "extends": ["config:recommended"],
+  "enabledManagers": ["helm-values","kubernetes","kustomize"],
   "kubernetes": {
     "managerFilePatterns": [
       "/infrastructure/core/[^/]+/.*\\.ya?ml$/",
@@ -49,18 +42,12 @@
     {
       "matchUpdateTypes": ["patch"],
       "automerge": true,
-      "automergeType": "pr" 
+      "automergeType": "pr"
     },
     {
       "matchUpdateTypes": ["minor", "major"],
       "automerge": false
-    },
-    {
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["docker.io/linuxserver/unifi-network-application"],
-      "matchFileNames": ["workloads/unifi/unifi-ctrl.yaml"],
-      "extractVersion": "^(?<version>\\d+\\.\\d+\\.\\d+)",
-      "versioning": "semver"
     }
   ]
 }
+

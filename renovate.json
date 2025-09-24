@@ -54,6 +54,13 @@
     {
       "matchUpdateTypes": ["minor", "major"],
       "automerge": false
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["docker.io/linuxserver/unifi-network-application"],
+      "matchFileNames": ["workloads/unifi/unifi-ctrl.yaml"],
+      "extractVersion": "^(?<version>\\d+\\.\\d+\\.\\d+)",
+      "versioning": "semver"
     }
   ]
 }

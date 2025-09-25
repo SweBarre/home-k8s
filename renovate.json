@@ -57,7 +57,6 @@
   ],
   "commitMessagePrefix": "chore(deps):",
   "commitMessageAction": "update",
-  "commitMessageTopic": "{{depName}} to {{currentValue}} → {{newVersion}}",
-  "prTitle": "chore(deps): update {{depName}} to {{newVersion}}"
+  "commitMessageTopic": "{{depName}} to {{newValue}}"
 }
 

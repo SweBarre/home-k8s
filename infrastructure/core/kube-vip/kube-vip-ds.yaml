@@ -1,8 +1,6 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  annotations:
-    deprecated.daemonset.template.generation: "2"
   labels:
     app.kubernetes.io/name: kube-vip-ds
     app.kubernetes.io/version: v0.8.9

@@ -1,0 +1,71 @@
+adminPassword: ""
+admin:
+  existingSecret: "pihole-admin-secret"
+  passwordKey: "password"
+
+dnsmasq:
+  additionalHostsEntries:
+  - 10.2.0.2    ldap
+  - 10.2.0.22   cumin
+  - 10.2.0.23   npm
+  - 10.2.0.23   serrano
+  - 10.2.0.24   coronado
+  - 10.2.0.25   chilaca
+  - 10.2.0.62   unifi
+  - 10.2.0.70   k3s
+  - 10.2.0.101  salt
+  - 10.2.0.102  pepper
+  - 10.2.0.250  demo-k3s
+  - 10.2.0.92   gitea
+  - 10.2.0.93   mqtt
+  - 10.0.10.3   sw2
+  - 10.0.10.4   ap1
+  - 10.0.10.5   ap2
+  - 10.0.10.6   ap3
+  - 10.0.10.7   ap4
+  - 10.0.10.20  woody
+  - 10.0.10.30  laserjet
+  - 10.100.100.90  ingress
+  customCnameEntries:
+  - cname=push.rre.nu,ingress.rre.nu
+  - cname=git.rre.nu,ingress.rre.nu
+  - cname=home.rre.nu,ingress.rre.nu
+  - cname=nextcloud.rre.nu,ingress.rre.nu
+  - cname=auth.rre.nu,ingress.rre.nu
+  - cname=wiki.rre.nu,ingress.rre.nu
+  - cname=repo.rre.nu,ingress.rre.nu
+  - cname=hostspot.rre.nu,ingress.rre.nu
+  - cname=grafana.rre.nu,npm.rre.nu
+  - cname=nv.rre.nu,npm.rre.nu
+  - cname=esphome.rre.nu,npm.rre.nu
+  - cname=prometheus.rre.nu,npm.rre.nu
+  - cname=unpoller.rre.nu,serrano.rre.nu
+  - cname=loki.rre.nu,serrano.rre.nu
+  - cname=db.rre.nu,serrano.rre.nu
+  - cname=foto.rre.nu,serrano.rre.nu
+  - cname=recipes.rre.nu,serrano.rre.nu
+  customDnsEntries:
+  - address=/app.rre.nu/10.100.100.90
+  customSettings:
+  - local=/rre.nu/
+  - expand-hosts
+  - domain=rre.nu
+persistentVolumeClaim:
+  accessModes:
+  - ReadWriteMany
+  enabled: true
+  size: 500Mi
+  storageClass: longhorn-rwx
+replicaCount: 1
+serviceDhcp:
+  enabled: false
+serviceDns:
+  annotations:
+    metallb.universe.tf/address-pool: bgp-ippool
+    metallb.universe.tf/allow-shared-ip: pihole-svc
+  loadBalancerIP: 10.100.100.30
+  type: LoadBalancer
+serviceWeb:
+  https:
+    enabled: false
+vitualHost: pihole.app.rre.nu

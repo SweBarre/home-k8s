@@ -1,0 +1,54 @@
+updateStrategy:
+  type: Recreate
+expose:
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      ingress.kubernetes.io/proxy-body-size: "0"
+      ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    className: nginx
+    hosts:
+      core: repo.rre.nu
+externalURL: https://repo.rre.nu
+harborAdminPassword: ""
+existingSecretAdminPassword: "harbor-admin-secret"
+existingSecretAdminPasswordKey: password
+metrics:
+  core:
+    path: /metrics
+    port: 8001
+  enabled: false
+  exporter:
+    path: /metrics
+    port: 8001
+  jobservice:
+    path: /metrics
+    port: 8001
+  registry:
+    path: /metrics
+    port: 8001
+  serviceMonitor:
+    additionalLabels: {}
+    enabled: false
+    interval: ""
+    metricRelabelings: []
+    relabelings: []
+persistence:
+  persistentVolumeClaim:
+    database:
+      size: 1Gi
+      storageClass: longhorn
+    jobservice:
+      size: 1Gi
+      storageClass: longhorn
+    redis:
+      size: 1Gi
+      storageClass: longhorn
+    registry:
+      size: 20Gi
+      storageClass: longhorn
+    trivy:
+      size: 5Gi
+      storageClass: longhorn

@@ -1,6 +1,12 @@
 updateStrategy:
   type: Recreate
 expose:
+  type: ingress
+  tls:
+    certSource: secret
+    secret:
+      secretName: harbort-cert
+
   ingress:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -11,6 +17,7 @@ expose:
     className: nginx
     hosts:
       core: repo.rre.nu
+
 externalURL: https://repo.rre.nu
 harborAdminPassword: ""
 existingSecretAdminPassword: "harbor-admin-secret"

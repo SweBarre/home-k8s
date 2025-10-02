@@ -22,7 +22,7 @@ spec:
       name: mongo-db
     spec:
       containers:
-      - image: docker.io/mongo:8.0@sha256:6eaaf8b194dc2c78a61deae63f1c163c2e55769c2157d6406f517d902694c792
+      - image: docker.io/mongo:8.0@sha256:ea783d8ac4dcac9f8a7ff236b26a52e36649fc1bdd1778ffb44ba5e4de776cda
         imagePullPolicy: IfNotPresent
         name: mongo-db
         ports:

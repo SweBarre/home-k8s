@@ -8,5 +8,5 @@ kubectl apply -f infrastructure/applications/argocd/projects.yaml
 kubectl apply -f infrastructure/infrastructure-core.yaml
 kubectl apply -f infrastructure/infrastructure-platform.yaml
 kubectl apply -f workloads/workloads.yaml
-kubectl apply -f platform/platform.yaml
+kubectl apply -f cumin/infrastructure/infrastructure.yaml
 ```

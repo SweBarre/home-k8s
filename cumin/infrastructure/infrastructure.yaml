@@ -14,7 +14,7 @@ spec:
       - path: cumin/infrastructure/*
   template:
     metadata:
-      name: '{{path.basename}}'
+      name: 'cumin-{{path.basename}}'
       finalizers: []
       labels:
         rre.nu/type: infrastructure-core
@@ -26,7 +26,7 @@ spec:
         path: '{{path}}'
         kustomize: {}
       destination:
-        server: cumin-cluster
+        server: https://10.2.0.22:6443
         namespace: argocd
       syncPolicy:
         automated:

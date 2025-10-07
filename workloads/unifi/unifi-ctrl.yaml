@@ -48,7 +48,7 @@ spec:
             secretKeyRef:
               name: unifi-settings
               key: MONGO_DBNAME
-        image: docker.io/linuxserver/unifi-network-application@sha256:a0acbc9cf1986823505d6dad041f0816388252f1e66e4c66397848fc0314c03b
+        image: docker.io/linuxserver/unifi-network-application@sha256:6e44301b9a6a6c8bccdf04a30d01d3f04f613e96c7888be0c2d81492f76a05b8
         imagePullPolicy: IfNotPresent
         name: unifi-ctrl
         ports:

@@ -5,6 +5,7 @@ metadata:
   namespace: nextcloud
 spec:
   instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.5
 
   bootstrap:
     initdb:
@@ -12,6 +13,17 @@ spec:
       owner: nextcloud
       secret:
         name: nextcloud-postgres
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: minio-store
 
   storage:
-    size: 1Gi
+    storageClass: longhorn
+    resizeInUseVolumes: true
+    size: 10Gi
+  walStorage:
+    storageClass: longhorn
+    resizeInUseVolumes: true
+    size: 2Gi

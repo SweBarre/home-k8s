@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ns.yaml
+  - s3-config.yaml
+
+namespace: minio
+
+helmCharts:
+  - name: operator
+    version: 7.1.1
+    repo: https://operator.min.io
+    releaseName: minio-operator
+    namespace: minio
+    valuesFile: operator-values.yaml
+  - name: tenant
+    version: 7.1.1
+    repo: https://operator.min.io
+    releaseName: s3
+    namespace: minio
+    valuesFile: s3-values.yaml

@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ns.yaml
   - cluster-cumin.yaml
+  - cluster-poblano.yaml
 
 helmCharts:
   - name: argo-cd

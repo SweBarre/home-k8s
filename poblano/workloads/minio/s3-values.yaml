@@ -1,0 +1,49 @@
+tenant:
+  name: s3
+  certificate:
+    requestAutoCert: true
+    certConfig:
+      commonName: s3.rre.nu
+  configSecret:
+    name: s3-config
+    existingSecret: true
+
+  pools:
+    - name: pool-0
+      servers: 4
+      volumesPerServer: 1
+      size: 7.27Ti
+      storageClassName: directpv-min-io
+ingress:
+  api:
+    enabled: true
+    ingressClassName: "nginx"
+    labels: { }
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+      nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    tls:
+      - hosts:
+        - s3.rre.nu
+        secretName: s3-tls-ingress
+    host: s3.rre.nu
+    path: /
+    pathType: Prefix
+  console:
+    enabled: true
+    ingressClassName: "nginx"
+    labels: { }
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    tls:
+      - hosts:
+        - s3-console.rre.nu
+        secretName: s3-console-tls-ingress
+    host: s3-console.rre.nu
+    path: /
+    pathType: Prefix
+

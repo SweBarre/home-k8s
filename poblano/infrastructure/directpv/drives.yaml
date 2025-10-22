@@ -1,0 +1,24 @@
+version: v1
+nodes:
+    - name: poblano
+      drives:
+        - id: 8:16$g0bTjAX/98gGVko+q4I8QRllSvmYPfzbCIcFENH0SOs=
+          name: sdb
+          size: 8001563222016
+          make: ATA ST8000DM004-2U9188
+          select: "yes"
+        - id: 8:32$VZRtx4aLdJSErAtChD6fHRLwP04smDf6IZMSiXj0URA=
+          name: sdc
+          size: 8001563222016
+          make: ATA ST8000DM004-2U9188
+          select: "yes"
+        - id: 8:0$8NIaX6m0MDW2vyNDMLZ7VjcYGXJwPS8pXJJ39+xQ53M=
+          name: sda
+          size: 8001563222016
+          make: ATA ST8000DM004-2U9188
+          select: "yes"
+        - id: 8:48$u0GAW7RPDwTudnTRrAcrdVBrhH5un2BrFwnDr0gvY6I=
+          name: sdd
+          size: 8001563222016
+          make: ATA ST8000DM004-2U9188
+          select: "yes"

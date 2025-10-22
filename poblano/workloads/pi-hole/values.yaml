@@ -44,7 +44,7 @@ dnsmasq:
   - domain=rre.nu
 persistentVolumeClaim:
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   enabled: true
   size: 500Mi
   storageClass: local-path

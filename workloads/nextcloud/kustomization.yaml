@@ -8,6 +8,7 @@ resources:
   - nextcloud-postgres-secret.yaml
   - nextcloud-admin-secret.yaml
   - nextcloud-redis-secret.yaml
+  - scheduled-backup.yaml
   - nextcloud-pg.yaml
 
 namespace: nextcloud

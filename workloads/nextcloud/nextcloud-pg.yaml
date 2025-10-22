@@ -7,6 +7,10 @@ spec:
   instances: 1
   imageName: ghcr.io/cloudnative-pg/postgresql:17.5
 
+  env:
+  - name: TZ
+    value: Europe/Stockholm
+
   bootstrap:
     initdb:
       database: nextcloud
@@ -26,4 +30,4 @@ spec:
   walStorage:
     storageClass: longhorn
     resizeInUseVolumes: true
-    size: 2Gi
+    size: 5Gi

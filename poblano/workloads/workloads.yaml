@@ -26,7 +26,7 @@ spec:
         path: '{{path}}'
         kustomize: {}
       destination:
-        server: https://kubernetes.default.svc
+        server: https://10.2.0.25:6443
         namespace: argocd
       syncPolicy:
         automated:

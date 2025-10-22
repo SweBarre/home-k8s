@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: workloads-poblano
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/SweBarre/home-k8s
+      revision: main
+      directories:
+      - path: poblano/workloads/*
+  template:
+    metadata:
+      name: 'poblano-{{path.basename}}'
+      finalizers: []
+      labels:
+        rre.nu/type: workloads
+    spec:
+      project: workloads
+      source:
+        repoURL: https://github.com/SweBarre/home-k8s
+        targetRevision: main
+        path: '{{path}}'
+        kustomize: {}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: argocd
+      syncPolicy:
+        automated:
+          enabled: true
+          prune: true
+          selfHeal: true
+        retry:
+          limit: 5
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 3m
+        syncOptions:
+        - CreateNamespace=true
+        - ServerSideApply=true
+        - RespectIgnoreDifferences=true
+        - ApplyOutOfSyncOnly=true
+        - Replace=false
+        - IgnoreMissingTemplate=true

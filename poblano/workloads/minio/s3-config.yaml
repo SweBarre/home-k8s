@@ -1,0 +1,13 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: s3-config
+  namespace: minio
+spec:
+  encryptedData:
+    config.env: AgAJouXCREcO/Ix4CJvk3wjN2+RLZJtfyoF8bskv2WfMperY6mhAzt0lcmb+LayQK469utKXHO18yh6tgPwQEAKu2HWgpCLnld+5oVVp++bm4jSJ0f76vf9+OKi4eVHTZ8Y9eoJv0T5q7ingeh3UQnQw5Mo6JMNdp8aa42OizL8D1T/XSLJBSCWLbNVT6hr0OR273qEP/AKZBNg/+/G/KUxolaNJyjLfOc16K05ENe5dkbNdhtfP6gLECze7bEcj/V27DVP1H1ejeth3ExDD61WT7We8baPDMMCEe9cOPP2uOIgmkdhkKFZEOZugRZK72Z3DGQTLHz6/TmF6uq7uJbgANc+pSkn4ocD0C3lifRcFRY5H0BRTfVbhMXZcJ9UnyxXAkPCH80qBboGXQFGO6boQVvoDridzsusrItwzVg1nt4Ns/9nx2/r5yOp93soCciPQYUY5lDrRevzFMC9Kdi/lMVd67QzoYeLp/szL06XKO93jY9rv+rVafKqM1pkYc4zyIshX+erudrda6fFkAiJbskaZjUPSaXUGxksEJ/L3f3gc2RFA9w6K2HEOoCCUtU6Y7qIpaqK9VXT5B8bfIW7P1JzdHLF+/iDkF0lUcMwcT/xlkrL6QIlrF4K71Dkkj5cjqv8CqSBtGWZtgiuZvWK2ik58fHfmc0AuNr4r0Vj+syKOS6aZ2bB6+GNCOEKDDiWyiMVSs7XZoPX+Ts5x1PZ0kwbAHo50Mdq1rZ9oA9AbCQuA23oKCOW6blP1wqrQB9pq4P2vJDshCNeuZZzCeXhhGi7xyfj8QxTFl0RV4z/oHG7hu3oOavQJGztf8a0+tfoOWXmCge1BSA6Ga6j4dTy4Am4ZpBZfBTV5iLIjkh6qIqSJ1ijreUE=
+  template:
+    metadata:
+      name: s3-config
+      namespace: minio

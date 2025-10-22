@@ -3,3 +3,4 @@ kind: Kustomization
 
 resources:
   - cnpg-1.27.0.yaml
+  - barmancloud-v0.7.0.yaml

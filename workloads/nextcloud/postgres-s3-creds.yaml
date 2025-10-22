@@ -1,0 +1,19 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations:
+    sealedsecrets.bitnami.com/cluster-wide: "true"
+  name: postres-s3-creds
+  namespace: nextcloud
+spec:
+  encryptedData:
+    ACCESS_KEY_ID: AgCPw7m+zfgfHzZtd0Gj70Rj/Qk/1qABmGou+VQuyChOWuZsjsFmPkw89uXTx5fvBx9KOvCIjqoOf9YZAYFaQxVrtrwspdamubYJS3TBw1voc0NOImKcDZ1rhd4rNiHG+ThwPuArvBYpseZQjH5qNVZyEzR+xnwcBB0PMR9EPQT/m3TU5QAqOgYlj4kk/cAcG7kCjY1QsA3pgsJ/KdUhQHiZkH9Xn3IJ5xtLzaTNsytJ4RodBzIPLN8jxhEXRj/Nu7Jjxvt4ihVW0wR0n9VtziViYqNvwYBcKzF3cewbOEw+RUuhX3/sxiMw4kO23asVEWQq76//rxg8UgiakmMS/vBJ6/HwcSWiKG+3hXmJnPNnP7za7uEkGBo1XkQuthyxhrrNW0qmOoL/M5N9IVx+R6AhUf4JmseiQyr7SOWE6mCO7YcbKoHtiKMrzHTYdPLX8TdjWbzfkRDa2mP7Jtr3QRjbTPxFTrYGFEWgIpWMkK1cdRJXRPSceMYUTLtrZf3XeOfURefLzjOGOzd1k9aE1+7kVZ+8RKc582w2RGdcU92cBZLz6rvt4ON27fo1GMYZ6/2m5phjDHSsqwpnA4lJ6bQj+G5ukIpiUxWCqm8SIE1YTxpt7fgdhUohv/VKosD6V30bKX5xluvg+FF6gVPpZmcuyXU6UJxwgE9AEN8eDn4nuwe7RJ+wA357dPPVrVf0jCXM2+CRGydCYZfeU7qXR1OK8edjbA==
+    ACCESS_SECRET_KEY: AgAPE9Nd9Mbp1lMYYYM5vBcgkHkQrOHzeOhtycYQu5d3mNXRxtAioqgvtLohEyO58QG3F3kMXAB9OE+ebDy+h+nqB2K7RcAKoKlcTr334ZfUTDmTvnJnHtwjn8oGSeXylmTkjCB65UDtNVXOQeg9rl9Y7N1+kKj2tkFaD8enPzcGk14cr9m9pIwyGAPWMMxv3liJmSallGgSnB4jWSRUf9DnL1l7K8/ksHZNAxCfYrp13CbdZQ6dkKbmM9wthnSwtxAFzgkCyVlSn2EQ7K8PNHMPJEkstzLIiYW0big6VUBvLKuKYoHcil6wBtXf8RuxhVSVP0MDKytc2tQ1ast/qlNiGEpDn3k4n2lBjKdeQOw3pSjgCuA4NwDGEjwYaGIPm5vYnzgmyEeXZG9D8m6QPlWLlYgNfs2Gdv9e+Y8lCU9+/Bnhg0FqgUbgW4f9U0Rj4ZFbnSgzZ273yl90tzI97TOUuH/9smJSp8Xeje3ou4I7GrMu/IcFAcXteSIYB4mZ6aeyIdI+uRPWajtjxaDAEq7YfjKmZmFlfSFgAaFAuxFG4UnqDqlV1ElZ2BAxr6O3aK+U0fc2cjySVgvOC8Rso1onEgPLpl1ut5ds7BIw/Fc1UDo5sdjzBOIhme0juoLIDyxHDM27Cu86hyPQ0cTnO/cIAfdpohhfbZCgkCqHP0WmTJj9YfuhNWmRwSiUcrZqVDeiDu+YdoV5qJsAZ28YfTM1rZjLFjLhYLyT/y7K7RLScvbcwPgygs85
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/cluster-wide: "true"
+      name: postres-s3-creds
+      namespace: nextcloud
+    type: Opaque

@@ -5,19 +5,18 @@ admin:
 
 dnsmasq:
   additionalHostsEntries:
-  - 10.2.0.2    ldap
+  - 10.2.0.1    fw
+  - 10.2.0.2    sw1
   - 10.2.0.22   cumin
-  - 10.2.0.23   npm
-  - 10.2.0.23   serrano
   - 10.2.0.24   coronado
-  - 10.2.0.25   chilaca
+  - 10.2.0.25   poblano
+  - 10.2.0.40   ingress-poblano
   - 10.2.0.62   unifi
   - 10.2.0.70   k3s
   - 10.2.0.101  salt
   - 10.2.0.102  pepper
   - 10.2.0.250  demo-k3s
   - 10.2.0.92   gitea
-  - 10.2.0.93   mqtt
   - 10.0.10.3   sw2
   - 10.0.10.4   ap1
   - 10.0.10.5   ap2
@@ -26,6 +25,7 @@ dnsmasq:
   - 10.0.10.20  woody
   - 10.0.10.30  laserjet
   - 10.100.100.90  ingress
+
   customCnameEntries:
   - cname=push.rre.nu,ingress.rre.nu
   - cname=git.rre.nu,ingress.rre.nu
@@ -34,16 +34,8 @@ dnsmasq:
   - cname=auth.rre.nu,ingress.rre.nu
   - cname=wiki.rre.nu,ingress.rre.nu
   - cname=repo.rre.nu,ingress.rre.nu
-  - cname=hostspot.rre.nu,ingress.rre.nu
-  - cname=grafana.rre.nu,npm.rre.nu
-  - cname=nv.rre.nu,npm.rre.nu
-  - cname=esphome.rre.nu,npm.rre.nu
-  - cname=prometheus.rre.nu,npm.rre.nu
-  - cname=unpoller.rre.nu,serrano.rre.nu
-  - cname=loki.rre.nu,serrano.rre.nu
-  - cname=db.rre.nu,serrano.rre.nu
-  - cname=foto.rre.nu,serrano.rre.nu
-  - cname=recipes.rre.nu,serrano.rre.nu
+  - cname=s3.rre.nu,ingress-poblano.rre.nu
+  - cname=s3-console.rre.nu,ingress-poblano.rre.nu
   customDnsEntries:
   - address=/app.rre.nu/10.100.100.90
   customSettings:

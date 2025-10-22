@@ -1,0 +1,19 @@
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: minio-store
+  namespace: default
+spec:
+  configuration:
+    destinationPath: s3://postgres-backup/
+    endpointURL: https://s3.rre.nu
+    s3Credentials:
+      accessKeyId:
+        key: ACCESS_KEY_ID
+        name: postres-s3-creds
+      secretAccessKey:
+        key: ACCESS_SECRET_KEY
+        name: postres-s3-creds
+    wal:
+      compression: gzip
+  retentionPolicy: 14d

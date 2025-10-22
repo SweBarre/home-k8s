@@ -3,6 +3,8 @@ kind: Kustomization
 
 resources:
   - ns.yaml
+  - objectstore.yaml
+  - postgres-s3-creds.yaml
   - nextcloud-postgres-secret.yaml
   - nextcloud-admin-secret.yaml
   - nextcloud-redis-secret.yaml

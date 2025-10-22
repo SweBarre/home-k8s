@@ -1,0 +1,3 @@
+controller:
+  enabled: true
+  logLevel: warn

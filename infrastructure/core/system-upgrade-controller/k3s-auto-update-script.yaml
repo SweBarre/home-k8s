@@ -52,7 +52,7 @@ data:
           - { key: node-role.kubernetes.io/master, operator: Exists }
       serviceAccountName: ${SERVICE_ACCOUNT}
       upgrade:
-        image: rancher/k3s-upgrade
+        image: rancher/k3s-upgrade@sha256:80ebd81c69abb90e80f81b46799dce8aa5cd142248c5c91dbe40db09e0ceb1ea
       version: ${LATEST_VERSION}
     EOF
 
@@ -70,7 +70,7 @@ data:
           - { key: node-role.kubernetes.io/master, operator: DoesNotExist }
       serviceAccountName: ${SERVICE_ACCOUNT}
       upgrade:
-        image: rancher/k3s-upgrade
+        image: rancher/k3s-upgrade@sha256:80ebd81c69abb90e80f81b46799dce8aa5cd142248c5c91dbe40db09e0ceb1ea
       version: ${LATEST_VERSION}
       dependsOn:
         - name: ${SERVER_PLAN}

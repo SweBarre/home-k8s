@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - crd.yaml
   - system-upgrade-controller.yaml
-  - k3s-upgrade-plan.yaml
   - k3s-auto-update-cronjob.yaml
   - k3s-auto-update-rbac.yaml
   - k3s-auto-update-script.yaml

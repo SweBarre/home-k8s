@@ -13,7 +13,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: upgrade-checker
-              image: ghcr.io/swebarre/systemd-containers:toolbox
+              image: ghcr.io/swebarre/systemd-containers:toolbox@sha256:b0b48e94eb307500523a53e68de72ea0113729f9b6c68ad1d6e2861237dbbe69
               command:
                 - /bin/bash
                 - -c

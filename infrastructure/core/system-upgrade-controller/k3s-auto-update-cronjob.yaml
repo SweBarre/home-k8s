@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: k3s-auto-upgrade
+  namespace: system-upgrade
+spec:
+  schedule: "30 4 * * 0"  #At 04:30 on Sunday.
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: system-upgrade
+          restartPolicy: OnFailure
+          containers:
+            - name: upgrade-checker
+              image: ghcr.io/swebarre/systemd-containers:toolbox
+              command:
+                - /bin/bash
+                - -c
+                - |
+                  bash /scripts/auto-upgrade-plan.sh
+              env:
+                - name: UPGRADE_CHANNEL
+                  value: stable
+              volumeMounts:
+                - name: script
+                  mountPath: /scripts
+          volumes:
+            - name: script
+              configMap:
+                name: k3s-auto-upgrade-script
+                defaultMode: 0755
+

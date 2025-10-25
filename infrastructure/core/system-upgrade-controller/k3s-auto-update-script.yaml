@@ -1,0 +1,79 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k3s-auto-upgrade-script
+  namespace: system-upgrade
+data:
+  auto-upgrade-plan.sh: |
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    CHANNEL="${UPGRADE_CHANNEL:-stable}"
+    NAMESPACE="${UPGRADE_NAMESPACE:-system-upgrade}"
+    SERVER_PLAN="${SERVER_PLAN_NAME:-server-plan}"
+    AGENT_PLAN="${AGENT_PLAN_NAME:-agent-plan}"
+    SERVICE_ACCOUNT="${UPGRADE_SERVICE_ACCOUNT:-system-upgrade}"
+
+    # Fetch latest version for the channel
+    read -r LATEST_VERSION CHANNEL_URL < <(
+      curl -s https://update.k3s.io/v1-release/channels |
+      jq -r --arg CH "$CHANNEL" '.data[] | select(.id==$CH) | [.latest, .links.self] | @tsv'
+    )
+
+    if [ -z "$LATEST_VERSION" ] || [ -z "$CHANNEL_URL" ]; then
+      echo "❌ Failed to get version info for channel '$CHANNEL'"
+      exit 1
+    fi
+
+    CURRENT_VERSION=$(kubectl get node -o jsonpath='{.items[0].status.nodeInfo.kubeletVersion}' | sed 's/k3s\///')
+
+    printf "   %-26s %s\n" "Current K3s version:" "$CURRENT_VERSION"
+    printf "   %-26s %s\n" "Latest ($CHANNEL):" "$LATEST_VERSION"
+
+    if [ "$CURRENT_VERSION" == "$LATEST_VERSION" ]; then
+      echo "✅ Cluster is already up to date."
+      exit 0
+    fi
+
+    echo "🚀 New version detected! Creating or updating upgrade plans..."
+
+    # --- Server Plan ---
+    cat <<EOF | kubectl apply -f -
+    apiVersion: upgrade.cattle.io/v1
+    kind: Plan
+    metadata:
+      name: ${SERVER_PLAN}
+      namespace: ${NAMESPACE}
+    spec:
+      concurrency: 1
+      nodeSelector:
+        matchExpressions:
+          - { key: node-role.kubernetes.io/master, operator: Exists }
+      serviceAccountName: ${SERVICE_ACCOUNT}
+      upgrade:
+        image: rancher/k3s-upgrade
+      version: ${LATEST_VERSION}
+    EOF
+
+    # --- Agent Plan ---
+    cat <<EOF | kubectl apply -f -
+    apiVersion: upgrade.cattle.io/v1
+    kind: Plan
+    metadata:
+      name: ${AGENT_PLAN}
+      namespace: ${NAMESPACE}
+    spec:
+      concurrency: 1
+      nodeSelector:
+        matchExpressions:
+          - { key: node-role.kubernetes.io/master, operator: DoesNotExist }
+      serviceAccountName: ${SERVICE_ACCOUNT}
+      upgrade:
+        image: rancher/k3s-upgrade
+      version: ${LATEST_VERSION}
+      dependsOn:
+        - name: ${SERVER_PLAN}
+    EOF
+
+    echo "✅ Upgrade plans applied for channel '$CHANNEL' (version $LATEST_VERSION)."

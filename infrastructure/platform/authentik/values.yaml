@@ -1,0 +1,39 @@
+global:
+  envFrom:
+    - secretRef:
+        name: authentik-env
+postgresql:
+  enabled: false
+redis:
+  enabled: true
+server:
+  deploymentStrategy:
+    type: Recreate
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    enabled: true
+    hosts:
+    - auth.rre.nu
+    ingressClassName: nginx
+    tls:
+    - hosts:
+      - auth.rre.nu
+      secretName: authentik-tls
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      selector:
+        release: mon
+  securityContext:
+    fsGroup: 1000
+    runAsGroup: 1000
+    runAsUser: 1000
+  volumeMounts:
+  - mountPath: /media
+    name: media
+  volumes:
+  - name: media
+    persistentVolumeClaim:
+      claimName: authentik-branding-media

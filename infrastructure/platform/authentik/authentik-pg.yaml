@@ -1,0 +1,36 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: authentik-db
+  namespace: authentik
+spec:
+  instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.5
+
+  env:
+  - name: TZ
+    value: Europe/Stockholm
+
+  bootstrap:
+    initdb:
+      database: authentik
+      owner: authentik
+      localeCollate: en_US.UTF-8
+      localeCType: en_US.UTF-8
+      secret:
+        name: authentik-db
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      enabled: true
+      isWALArchiver: false
+      parameters:
+        barmanObjectName: minio-store
+
+  storage:
+    storageClass: longhorn
+    resizeInUseVolumes: true
+    size: 8Gi
+  walStorage:
+    storageClass: longhorn
+    resizeInUseVolumes: true
+    size: 5Gi

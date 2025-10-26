@@ -4,10 +4,11 @@ metadata:
   namespace: authentik
   name: authentik-daily-db-backup
 spec:
-  schedule: "0 22 * * *"
+  schedule: "0 0 22 * * *"
+  immediate: true
   backupOwnerReference: self
   cluster:
-    name: authentik-pg
+    name: authentik-db
   method: plugin
   pluginConfiguration:
     name: barman-cloud.cloudnative-pg.io

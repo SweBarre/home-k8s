@@ -2,7 +2,7 @@ apiVersion: barmancloud.cnpg.io/v1
 kind: ObjectStore
 metadata:
   name: minio-store
-  namespace: default
+  namespace: nextcloud
 spec:
   configuration:
     destinationPath: s3://postgres-backup/

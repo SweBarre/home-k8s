@@ -1,0 +1,62 @@
+controllers:
+  main:
+    containers:
+      main:
+        image:
+          tag: v2.2.1
+        strategy: Recreate
+        env:
+          DB_HOSTNAME: immich-pg-rw
+          DB_DATABASE_NAME: "immich"
+          DB_USERNAME:
+            valueFrom:
+              secretKeyRef:
+                name: immich-pg-user
+                key: username
+          DB_PASSWORD:
+            valueFrom:
+              secretKeyRef: 
+                name: immich-pg-user
+                key: password
+          IMMICH_CONFIG_FILE: /config/immich-config.yaml
+
+immich:
+  metrics:
+    enabled: true
+  persistence:
+    library:
+      existingClaim: immich-library
+
+server:
+  ingress:
+    main:
+      className: nginx
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      hosts:
+        - host: foto.app.rre.nu
+          paths:
+            - path: "/"
+      tls:
+        - secretName: immich-tls
+          hosts:
+            - foto.app.rre.nu
+
+persistence:
+  config:
+    enabled: true
+    type: secret
+    name: immich-config
+
+machine-learning:
+  persistence:
+    cache:
+      storageClass: longhorn
+
+valkey:
+  enabled: true
+  persistence:
+    data:
+      storageClass: longhorn

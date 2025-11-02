@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ns.yaml
+  - postres-s3-creds.yaml
+  - objectstore.yaml
+  - immich-pg-user.yaml
+  - immich-pg-superuser.yaml
+  - immich-library-pvc.yaml
+  - immich-pg.yaml
+  - immich-config.yaml
+  - scheduled-backup.yaml
+
+
+helmCharts:
+  - name: immich
+    version: 0.10.1
+    repo: https://immich-app.github.io/immich-charts
+    releaseName: immich
+    namespace: immich
+    valuesFile: values.yaml

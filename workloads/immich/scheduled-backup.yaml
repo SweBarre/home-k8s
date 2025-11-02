@@ -1,7 +1,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
-  namespace: nextcloud
+  namespace: immich
   name: immich-daily-db-backup
 spec:
   schedule: "0 0 6 * * *"

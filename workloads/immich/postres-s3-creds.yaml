@@ -1,0 +1,19 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations:
+    sealedsecrets.bitnami.com/cluster-wide: "true"
+  name: postres-s3-creds
+  namespace: immich
+spec:
+  encryptedData:
+    ACCESS_KEY_ID: AgAzp/EbO8tX8pQIeXRsuqgw0cw84vSuuXAGjki20bpZHSYIQaK1/d2tFLB61AHRlJvbfFnrVUzjETHk+q7H5lP9hEpc1XSyXyhLcqzVPAXzx6MC08QeJEmf3Hvo1XKVAfJO6zXOQ3Pqo6ssFpU/N5N6i735r8Z2T8zWuc4wJGh4dgnawMHsQCqksZU2XO5G+JWu5vPr2ih3Bd//t2qIekPPyhSqUGekN5dSV5RL3i6c+X+Rv7t5l+WQnVGu2Egf//dWkXuAwUHoNF64wa82yOu1TY/RKlE626KoQfePeKGKIguEhU74EpSnleJl7VDHakOBWPACVkoRfjDpS1QDcvom+sAlBndEcNjNeZpp90C7QyQ8dV3L6ESSuZNxH5P+fNuEYU03n1LSbCJVJAK88xU9PtgSIkmpR4XUGqDKUBo+CtsqTg9SOxYbHoFq3RAkrFRpGsAblvXu6vwuhGY0/bO5j9/IMmW3nhUBXX5aGbJ48XApVXTVy3MjFDA39pb4DInoXBl9P97sZpnSPwqHzOXXyvRjCKBYhDrSCSn445+rFAGnl3dPsscHP8RaMzMKuM/yyOewvq0GHNF2WiOz86FvVkicqTpHRnaBGx5Z9h6J7UQY+1HBS5yo36GSqCYXwW1AS9RcQDbOv4v/b/Kj1pWeae4kpT8Dqc7uBCWCmFFiperDmK5Li2A/uNFfXXHAz4/eqZCRbm5rsnLYLVXfuNblaW7dRw==
+    ACCESS_SECRET_KEY: AgCk4ItqMz6azb1r/VBb0XP+27CLH/qJA29noXQKbjAz/tup9Nn8icL+9NgnlV2B4llNQUXFiTxXAVYY4GB1raJIZ9Xy6yZ8HrI3hx7+lY4aL1vmz7wPeedxWnktEvUR6rmGzJSMbzTyMskutu9PJ27OWO7N8z8wNtmcKLs35pmm9vSWSU0gocmSBMw5f36aiPyBVSuMj9iYz5ZAGKUGjKnNixZvbQDEqP3AVp+FQ29iT6IXXrGFP7HxF8H8L4Kc3/XOhQTfs9uSL5b5HYnioVKyohSadXxR5wpzLCg8xCN8DoJ46WpSsklKUuGDPzo8HdlRL/TD6Ze4DraVEHgfq4MQK+Hy9B4tE2Ah4w7SOEVrkjTo0l0syiXzAWpWCUvhqGQMju0RlicScPvjzQ2t1TW/u5+nHtvrIfTPrM6XkSHaM/wBqOJfWXel5t25pVzU6dj8yYkxNpmHuFN1ncAWm6cG19Ewj0NNAMINBSekJMTJS9kplwLCQH1LgKpGg23GxVlqr15gsKzLQWbFRlZLdKKABa1MnlixMQId45z6LOK6wWxitD4wviv/Fqq0C4Yw6aGDC3X1UQbZn2mMCgDtSqQ5Q2sa+UgrvROp7DU1Ab4xGjQJg3PpU7hofPZ74qf56MYYRljYPvVRhOx59AmnSE7o836rGns5DqDDqLnFEge3aYD7PTdPGMK8Y0MCqDNuUD1OF9vKBjmj0ltTQqP/9zQT61SAeATNuZQZE6IWit6iS0KYCZKzIaiM
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/cluster-wide: "true"
+      name: postres-s3-creds
+      namespace: immich
+    type: Opaque

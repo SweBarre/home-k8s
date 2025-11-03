@@ -32,3 +32,9 @@ spec:
       postInitApplicationSQL:
         - CREATE EXTENSION vchord CASCADE;
         - CREATE EXTENSION earthdistance CASCADE;
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      enabled: true
+      isWALArchiver: false
+      parameters:
+        barmanObjectName: minio-store

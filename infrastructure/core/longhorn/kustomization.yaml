@@ -6,7 +6,7 @@ resources:
 
 helmCharts:
   - name: longhorn
-    version: 1.10.0
+    version: 1.10.1
     repo: https://charts.longhorn.io
     releaseName: lognhorn
     namespace: longhorn-system

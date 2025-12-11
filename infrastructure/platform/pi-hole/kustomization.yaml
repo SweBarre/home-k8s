@@ -9,7 +9,7 @@ namespace: pihole
 
 helmCharts:
   - name: pihole
-    version: 2.34.0
+    version: 2.35.0
     repo: https://mojo2600.github.io/pihole-kubernetes/
     releaseName: pihole
     namespace: pihole

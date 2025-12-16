@@ -24,6 +24,7 @@ dnsmasq:
   - 10.0.10.7   ap4
   - 10.0.10.20  woody
   - 10.0.10.30  laserjet
+  - 10.0.10.158 framer
   - 10.100.100.90  ingress
 
   customCnameEntries:

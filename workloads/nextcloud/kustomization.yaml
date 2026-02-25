@@ -15,7 +15,7 @@ namespace: nextcloud
 
 helmCharts:
   - name: nextcloud
-    version: 8.9.0
+    version: 8.9.1
     repo: https://nextcloud.github.io/helm/
     releaseName: nextcloud
     namespace: nextcloud
